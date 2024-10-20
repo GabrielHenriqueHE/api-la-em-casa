@@ -52,4 +52,8 @@ public class AuthenticationService {
         return tokenService.generateToken((User) auth.getPrincipal());
     }
 
+    public User getUserByToken(String token) {
+        return this.userRepository.findByEmail(this.tokenService.validateToken(token));
+    }
+
 }

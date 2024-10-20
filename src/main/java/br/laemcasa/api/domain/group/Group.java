@@ -43,8 +43,11 @@ public class Group implements Serializable {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @Column(nullable = false, unique = true)
-    private String link;
+    public Group(String name, String description, User owner) {
+        this.name = name;
+        this.description = description;
+        this.owner = owner;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
@@ -56,7 +59,7 @@ public class Group implements Serializable {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> members;
+    private Set<User> members = new HashSet<>();
 
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
     private Set<Task> tasks = new HashSet<>();

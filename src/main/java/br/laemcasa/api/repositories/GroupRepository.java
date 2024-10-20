@@ -9,5 +9,4 @@ import java.util.UUID;
 
 public interface GroupRepository extends JpaRepository<Group, UUID> {
     Set<Group> findGroupByOwner(User Owner);
-    Group findGroupByLink(String link);
 }
